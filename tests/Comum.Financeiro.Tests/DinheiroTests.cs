@@ -100,7 +100,7 @@ public class DinheiroTests
         var dinheiro = Dinheiro.EmReais(10m)
         var valorFormatado = dinheiro.Formatar();
         
-        Assert.Cointains("R$", valorFormatado);
+        Assert.Contains("R$", valorFormatado);
         Assert.Contains("10,50", valorFormatado);
     }
 }
