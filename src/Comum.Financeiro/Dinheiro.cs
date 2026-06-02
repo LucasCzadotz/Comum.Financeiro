@@ -10,7 +10,7 @@ public sealed record Dinheiro : IComparable<Dinheiro>
         Valor = valor;
     }
 
-    public decimal Valor { get; }
+    public decimal Valor { get; } 
 
     public Moeda Moeda { get; }
 
@@ -35,7 +35,23 @@ public sealed record Dinheiro : IComparable<Dinheiro>
 
     public Dinheiro Multiplicar(decimal quantidade)
     {
-        return new Dinheiro(Valor * quantidade, Moeda);
+        return new Dinheiro(PoliticaArredondamento.Arredondar(valor * quantidade), Moeda);
+    }
+
+    public Dinheiro AplicarDesconto(Percentual percentual)
+    {
+        if (percentual.valor > 100m)
+        {
+            throw new ValorFinanceiroInvalidoException("O valor percentual de desconto não pode ultrapassar 100%");
+        }
+        var valorComDesconto = Valor * Percentual.ComFatorDeDesconto();
+
+        if(valorComDesconto < 0)
+        {
+            throw new ValorFinanceiroInvalidoException("O resultado do desconto não pode ser negativo");
+        }
+
+        return new Dinheiro(PoliticaArredondamento.Arredondar(valorComDesconto), Moeda);
     }
 
     public bool EhZero()

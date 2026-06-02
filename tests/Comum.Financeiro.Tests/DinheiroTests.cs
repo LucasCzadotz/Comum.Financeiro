@@ -1,4 +1,5 @@
 using Comum.Financeiro;
+namespace Comum.Financeiro.Tests
 
 public class DinheiroTests
 {   
