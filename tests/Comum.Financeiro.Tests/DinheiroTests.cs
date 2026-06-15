@@ -95,12 +95,45 @@ public class DinheiroTests
     }
     
     [Fact]
-    public void DeveFormatarValorEm()
+    public void DeveFormatarValorEmReais()
     {
         var dinheiro = Dinheiro.EmReais(10m)
         var valorFormatado = dinheiro.Formatar();
         
         Assert.Contains("R$", valorFormatado);
         Assert.Contains("10,50", valorFormatado);
+    }
+    
+    [Fact]
+    public void DeveAplicarDescontoPercentual()
+    {
+        var dinheiro = Dinheiro.EmReais(100m);
+        var desconto = Percentual.De(10m);
+        
+        var resultado = dinheiro.AplicarDesconto(desconto);
+        
+        Assert.Equal(90m, resultado.valor);
+        Assert.Equal(Moeda.RealBrasileiro, resultado.Moeda);
+    }
+    
+    [Fact]
+    public void DeveAplicarDAcrescimoPercentual()
+    {
+        var dinheiro = Dinheiro.EmReais(100m);
+        var desconto = Percentual.De(10m);
+        
+        var resultado = dinheiro.AplicarAcrescimo(desconto);
+        
+        Assert.Equal(110m, resultado.valor);
+        Assert.Equal(Moeda.RealBrasileiro, resultado.Moeda);
+    }
+    
+    [Fact]
+    public void DeveImpedirDescontoMaiorQueCemPorCento()
+    {
+        var dinheiro = Dinheiro.EmReais(100m);
+        var desconto = Percentual.De(101m);
+        
+        Assert.Throws<ValorFinanceiroInvalidoException>(() => dinheiro.AplicarDesconto(desconto));
     }
 }
