@@ -4,6 +4,15 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Comum.Financeiro</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Lucas Diego Czadotz</Authors>
+    <Company>IFPR - Uniao da Vitoria</Company>
+    <Product>Comum.Financeiro</Product>
+    <Title>Comum.Financeiro</Title>
+    <Description>Biblioteca reutilizavel para representacao de dinheiro, moeda, percentuais e operacoes financeiras basicas em sistemas .NET</Description>
+    <PackageTags>financeiro;dinheiro;moeda;dotnet;csharp;value-object</PackageTags>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
 </Project>
